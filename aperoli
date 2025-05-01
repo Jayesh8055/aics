@@ -1,0 +1,55 @@
+from itertools import chain, combinations
+
+# Load a sample dataset
+def load_dataset():
+    return [
+        ['milk', 'bread', 'eggs'],
+        ['milk', 'bread'],
+        ['milk', 'butter'],
+        ['bread', 'butter'],
+        ['bread', 'eggs'],
+        ['butter']
+    ]
+
+# Generate candidate itemsets of size k
+def generate_candidates(itemset, k):
+    return list(combinations(set(itemset), k))
+
+# Count support for a candidate itemset
+def support_count(dataset, candidate):
+    count = 0
+    for transaction in dataset:
+        if set(candidate).issubset(set(transaction)):
+            count += 1
+    return count
+
+# Apriori algorithm
+def apriori(dataset, min_support):
+    itemset = list(set(chain(*dataset)))  # Flatten dataset and get unique items
+    frequent_itemsets = []
+    k = 1
+
+    while itemset:
+        candidates = generate_candidates(itemset, k)
+        frequent_candidates = []
+
+        for candidate in candidates:
+            support = support_count(dataset, candidate) / len(dataset)
+            if support >= min_support:
+                frequent_itemsets.append(candidate)
+                frequent_candidates.append(candidate)
+
+        itemset = list(set(chain(*frequent_candidates)))
+        k += 1
+
+    return frequent_itemsets
+
+# Main function
+if __name__ == "__main__":
+    dataset = load_dataset()
+    min_support = 0.5  # Minimum support threshold
+    frequent_itemsets = apriori(dataset, min_support)
+
+    print("Frequent Itemsets:")
+    for itemset in frequent_itemsets:
+        print(itemset)
