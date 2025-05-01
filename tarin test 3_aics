@@ -1,0 +1,50 @@
+#3 split 
+
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+import pandas as pd
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data  # Features
+y = iris.target  # Target variable
+
+# Display dataset information
+print("Dataset Description:")
+print(iris.DESCR.split("Notes:")[0])  # Show first part of description
+print("\nFeature names:", iris.feature_names)
+print("Target names:", iris.target_names)
+print("\nFirst 5 samples of the dataset:")
+print(pd.DataFrame(iris.data, columns=iris.feature_names).head())
+
+# Split the dataset into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,       # 20% of data for testing
+    random_state=42,     # Seed for reproducibility
+    stratify=y           # Maintain class distribution
+)
+
+# Print the results of the split
+print("\nSplit results:")
+print(f"Training set features shape: {X_train.shape}")
+print(f"Test set features shape: {X_test.shape}")
+print(f"Training set target shape: {y_train.shape}")
+print(f"Test set target shape: {y_test.shape}")
+
+//aaaaaaaaaaaa
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,  # 20% of data for testing
+    random_state=42,  # Seed for reproducibility
+    stratify=y       )
+print("\nSplit results:")
+print(f"Training set features shape: {X_train.shape}")
+print(f"Test set features shape: {X_test.shape}")
+print(f"Training set target shape: {y_train.shape}")
+print(f"Test set target shape: {y_test.shape}")
+
+
+
