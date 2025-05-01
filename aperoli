@@ -53,3 +53,22 @@ if __name__ == "__main__":
     print("Frequent Itemsets:")
     for itemset in frequent_itemsets:
         print(itemset)
+
+
+Support tells how often an item or itemset appears in the whole dataset.
+Support(A)= Total number of transactions containing A
+                Number of transactions 
+​
+Confidence tells how likely item B is bought when A is bought
+Confidence(A→B)= Support(A∪B)
+                  Support(A)
+
+​Lift tells how much more likely A and B occur together than if they were independent
+Lift(A→B)= Confidence(A→B)
+            Support(B)
+
+​
+
+ 
+
+
